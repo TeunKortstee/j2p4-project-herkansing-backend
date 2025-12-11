@@ -1,4 +1,4 @@
-package com.example24.Backend.Project.DTOs;
+package Dtos;
 
 public class LoginRequestDTO {
     public String email;

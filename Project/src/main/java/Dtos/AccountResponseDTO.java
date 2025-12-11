@@ -1,4 +1,4 @@
-package com.example24.Backend.Project.DTOs;
+package Dtos;
 
 import java.math.BigDecimal;
 
