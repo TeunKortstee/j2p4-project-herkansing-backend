@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import Dtos.AccountResponseDTO;
 import Mappers.AccountResponseDtoMapper;
 import Models.Account;
+import Models.User;
 import Repositories.AccountRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -37,6 +38,12 @@ public class AccountServiceJpa implements AccountService {
     public List<AccountResponseDTO> getAccountsByIban(String Iban) {
         Optional<Account> accounts = repository.getAccountsByIban(Iban);
         return accounts.stream().map(result -> mapper.accountToAccountResponseDTO(result)).toList();
+    }
+
+    @Override
+    public List<AccountResponseDTO> getUserAccounts(User user) {
+        List<Account> accounts = this.repository.getAccountsByUser(user);
+        return accounts.stream().map(result -> this.mapper.accountToAccountResponseDTO(result)).toList();
     }
 
 }

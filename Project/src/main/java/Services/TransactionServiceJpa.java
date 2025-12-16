@@ -5,6 +5,7 @@ import java.util.List;
 import Dtos.TransactionResponseDTO;
 import Mappers.TransactionResponseDtoMapper;
 import Models.Transaction;
+import Models.User;
 import Repositories.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -31,6 +32,12 @@ public class TransactionServiceJpa implements TransactionService {
     public List<TransactionResponseDTO> GetTransactionByIban(String Iban) {
         List<Transaction> transactions = repository.findAllByIban(Iban);
         return transactions.stream().map(result -> mapper.apply(result)).toList();
+    }
+
+    @Override
+    public List<TransactionResponseDTO> getUserTransactions(User user) {
+        List<Transaction> transactions = this.repository.findTransactionsByUser(user);
+        return transactions.stream().map(result -> this.mapper.apply(result)).toList();
     }
 
 }
